@@ -1,6 +1,14 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+module.exports = {
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  theme: {
     screens: {
       sm: '640px',
       // => @media (min-width: 640px) { ... }
@@ -17,14 +25,6 @@ export default {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
-    extend: {},
-  },
-  plugins: [],
-}
-
-module.exports = {
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  theme: {
     extend: {},
   },
   plugins: [],

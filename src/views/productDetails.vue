@@ -321,7 +321,7 @@ const relatedProducts = computed(() => {
 })
 
 // Main image handling
-const mainImage = ref<string | null>(null)
+const mainImage = ref<string | undefined>(undefined)
 
 // Initialize mainImage when selectedProduct changes
 const updateMainImage = () => {
