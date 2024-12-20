@@ -1,5 +1,5 @@
-module.exports = {
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     screens: {
       sm: '640px',
@@ -17,6 +17,14 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
+    extend: {},
+  },
+  plugins: [],
+}
+
+module.exports = {
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  theme: {
     extend: {},
   },
   plugins: [],
