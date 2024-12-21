@@ -1,10 +1,7 @@
 <template>
   <div v-if="product">
     <!-- product card -->
-    <div
-      :class="{ 'product-list': !isGridView }"
-      class="card border-2 shadow-sm rounded text-center"
-    >
+    <div class="card border-2 shadow-sm rounded text-center">
       <div class="image-container relative">
         <img :src="product.images[0]" :alt="product.title" />
         <div class="overlay-buttons">
@@ -119,18 +116,6 @@ const addToCart = (product: Product) => {
 </script>
 
 <style lang="scss" scoped>
-.product-list {
-  flex-direction: row;
-  height: fit-content !important;
-  padding: 30px;
-  align-items: center;
-  justify-content: center;
-
-  .image-container {
-    flex-basis: 50%;
-  }
-}
-
 .card {
   position: relative;
 

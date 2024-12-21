@@ -15,27 +15,31 @@
         <div
           v-for="item in store.cartItems"
           :key="item.id"
-          class="item col-span-12 grid grid-cols-12 rounded md:py-8 mb-2 shadow-sm border-b"
+          class="item col-span-12 grid grid-cols-12 rounded md:py-8 mb-2 shadow-sm border-b gap-3"
         >
-          <div class="item-cell col-span-1">
+          <div class="item-cell col-span-2 md:col-span-1">
             <font-awesome-icon
               @click="deleteItem(item)"
               :icon="['fas', 'xmark']"
               style="color: #ce1212; cursor: pointer"
             />
           </div>
-          <div class="img item-cell col-span-1"><img :src="item.images[0]" alt="product.id" /></div>
+          <div class="img item-cell col-span-2 md:col-span-1">
+            <img :src="item.images[0]" alt="product.id" />
+          </div>
 
-          <span class="item-cell col-span-4">{{
+          <span class="item-cell col-span-8 md:col-span-4">{{
             item.title.split(' ').slice(0, 3).join(' ')
           }}</span>
-          <span class="item-cell col-span-2">$ {{ item.price }}</span>
-          <div class="item-cell col-span-2 bg-gray-200 m-auto flex-col md:flex-row md:w-24">
+          <span class="item-cell col-span-4 md:col-span-2">$ {{ item.price }}</span>
+          <div class="item-cell col-span-4 md:col-span-2 bg-gray-200 m-auto flex">
             <button @click="decreaseQuantity(item)" class="btn text-blue-500">-</button>
             <span class="m-3">{{ item.quantity }}</span>
             <button @click="addToCart(item)" class="btn text-blue-500">+</button>
           </div>
-          <span class="item-cell col-span-2">$ {{ (item.quantity * item.price).toFixed(2) }}</span>
+          <span class="item-cell col-span-4 md:col-span-2"
+            >$ {{ (item.quantity * item.price).toFixed(2) }}</span
+          >
         </div>
       </div>
 

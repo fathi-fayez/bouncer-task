@@ -84,7 +84,7 @@
         </div>
 
         <!-- Search Field -->
-        <div @click="OnSearch = true" class="flex no-wrap items-center gap-3">
+        <div @click="OnSearch = true" class="flex no-wrap items-center gap-3 ml-4">
           <i class="fa-solid fa-magnifying-glass text-gray-500 cursor-pointer"></i>
           <form v-if="OnSearch">
             <input

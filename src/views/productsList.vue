@@ -177,7 +177,6 @@
               <!-- Display Icons -->
               <div class="flex items-center gap-0 md:gap-4">
                 <a
-                  v-show="windowWidth > 698"
                   href="#"
                   class="text-gray-800 hover:text-blue-500 p-2"
                   @click.prevent="isGridView = true"
@@ -197,14 +196,105 @@
             </div>
           </nav>
 
-          <!-- Products -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- Grid Products -->
+          <div v-if="isGridView" class="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div
-              :class="{ 'col-span-1': isGridView, 'col-span-3': !isGridView }"
               v-for="product in paginatedProducts"
               :key="product.id"
+              class="grid-products col-span-1"
             >
-              <singleProduct :product="product" :isGridView="isGridView" />
+              <singleProduct :product="product" />
+            </div>
+          </div>
+
+          <!-- Single Products -->
+          <div v-else class="grid grid-cols-1">
+            <!-- Product -->
+            <div
+              v-for="product in paginatedProducts"
+              :key="product.id"
+              class="col-span-1 grid grid-cols-12 gap-3 border-b-4 border-gray-400 mb-4 py-8"
+            >
+              <!-- Image -->
+              <div class="col-span-12 md:col-span-4">
+                <img
+                  class="main-image w-full rounded"
+                  :src="product.images[0]"
+                  :alt="product.title"
+                />
+              </div>
+              <!-- Details -->
+              <div class="col-span-12 md:col-span-8">
+                <router-link
+                  :to="{
+                    name: 'productDetails',
+                    params: { id: product.id, category: product.category.name },
+                  }"
+                >
+                  <h4 class="product-name mb-4 text-black">{{ product.title }}</h4>
+                </router-link>
+                <!-- Rating Stars -->
+                <div class="rating flex border-b-2 pb-4">
+                  <i
+                    class="fa-solid fa-star inline-block mr-1"
+                    style="color: #ffc600"
+                    v-for="i in 3"
+                    :key="'filled-' + i"
+                  ></i>
+                  <i class="fa-solid fa-star" v-for="i in 2" :key="'empty-' + i"></i>
+                  <span class="mx-3 text-gray-300">0 reviews</span>
+                  <a class="text-blue-500" href="">Submit a review</a>
+                </div>
+
+                <!-- Shipping Details -->
+                <div>
+                  <div class="price">
+                    <span class="last-price">${{ product.price }} </span
+                    ><span class="old-price">$599</span>
+                  </div>
+                  <p>{{ product.description }}</p>
+
+                  <!-- Cart Buttons -->
+                  <div class="flex my-4 items-center">
+                    <button
+                      @click="addToCart(product)"
+                      class="flex items-center gap-2 p-2 text-xs md:p-3 md:text-sm h-12 text-gray-400 bg-gray-200 mx-2"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M12.9611 11C13.912 10.9984 14.7293 10.3251 14.913 9.39203L15.913 4.39203C16.0304 3.80524 15.8787 3.19672 15.4998 2.73358C15.1209 2.27039 14.5545 2.00128 13.956 2H4.00005V1C4.00005 0.447693 3.55233 0 3.00005 0H1.00906C0.456779 0 0.00905597 0.447693 0.00905597 1C0.00905597 1.55231 0.456779 2 1.00906 2H2.00906V12C1.19933 11.9964 0.467277 12.4813 0.154899 13.2284C-0.157509 13.9755 0.0113753 14.8372 0.582664 15.411C1.15395 15.9849 2.01488 16.1577 2.76333 15.8486C3.5118 15.5396 4.00005 14.8098 4.00005 14H10.969C10.9734 15.0991 11.8672 15.9869 12.9663 15.9839C14.0654 15.981 14.9545 15.0884 14.953 13.9893C14.9515 12.8902 14.0601 11.9999 12.961 11.9999L4.00005 12V11H12.9611ZM13.9611 4L12.9611 9H4.00005V4H13.956H13.9611Z"
+                          fill="#a3a8a5"
+                        />
+                      </svg>
+                      Add To Cart
+                    </button>
+                    <button class="flex items-center p-4 bg-gray-200 mx-2">
+                      <svg
+                        width="16"
+                        height="14"
+                        viewBox="0 0 16 14"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M10.9825 2.00001C12.1622 2.00196 13.2313 2.6952 13.7144 3.77143C14.1976 4.84766 14.0051 6.10719 13.2225 6.99C12.6725 7.60999 7.98254 12 7.98254 12C7.98254 12 3.28253 7.60999 2.73254 6.97999C2.24744 6.43482 1.98041 5.72981 1.9826 5.00001C1.9826 3.34315 3.32574 2.00001 4.9826 2.00001C6.63946 2.00001 7.9826 3.34315 7.9826 5.00001C7.9826 3.34315 9.32574 2.00001 10.9825 2.00001ZM10.9825 8.10398e-06C9.90039 -0.00194502 8.84711 0.34919 7.98254 1.00007C5.93133 -0.524467 3.06061 -0.256706 1.32672 1.62086C-0.407166 3.49842 -0.446046 6.38129 1.23657 8.30494C1.79858 8.94898 5.49756 12.413 6.61755 13.459C7.38635 14.1779 8.58075 14.1779 9.34955 13.459C10.4656 12.414 14.1495 8.95899 14.7186 8.31599C16.0227 6.84418 16.343 4.7447 15.5372 2.951C14.7313 1.1573 12.949 0.00244951 10.9825 8.10398e-06Z"
+                          fill="#33A0FF"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -242,13 +332,19 @@ import singleProduct from '../components/products/singleProduct.vue'
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useProductsStore } from '@/stores/productsStore'
+// 000000000
+import { useCartStore } from '../stores/cartStore'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+
+// Cart store instance
+const cartStore = useCartStore()
 const productsStore = useProductsStore()
 const isGridView = ref<boolean>(true)
 const route = useRoute()
 const productCategory = ref(route.params.category)
 const products = computed<Product[]>(() => productsStore.products)
 const lengthOfProducts = ref(0)
-const windowWidth = ref(0)
 
 interface Product {
   id: number
@@ -267,6 +363,30 @@ const minRangeValueGap = 20
 const activeDropdown = ref<string | null>(null)
 const toggleSideBar = ref<boolean>(false)
 const sideBar = ref<HTMLElement | null>(null)
+
+interface Product {
+  id: number
+  title: string
+  price: number
+  quantity?: number
+  description: string
+  images: string[]
+  category: {
+    name: string
+  }
+}
+
+interface cartItem {
+  id: number
+  title: string
+  price: number
+  quantity: number
+  description: string
+  images: string[]
+  category: {
+    name: string
+  }
+}
 
 // Close the sidebar when clicking outside
 function handleClickOutside(event: MouseEvent) {
@@ -310,14 +430,6 @@ const updateRanges = () => {
   }
 }
 
-// Set The Screen Width
-onMounted(async () => {
-  windowWidth.value = window.innerWidth
-  window.onresize = () => {
-    windowWidth.value = window.innerWidth
-  }
-})
-
 // Watch Route Changes
 watch(
   () => route.params,
@@ -326,6 +438,17 @@ watch(
   },
 )
 watch([minRange, maxRange], updateRanges)
+
+// Add To Cart
+const addToCart = (product: Product) => {
+  if (!product || !product.id) {
+    toast.error('Invalid product')
+    return
+  }
+  const item = { ...product, quantity: 1 }
+  cartStore.addProductToCart(item as cartItem)
+  toast.success('Added To Cart', { autoClose: 500 })
+}
 
 // Get The Selected Products
 const getProducts = computed(() => {
@@ -364,6 +487,23 @@ const changePage = (page: number) => {
   left: -260px;
   transition: all 0.4s ease;
 }
+
+.price {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 24px;
+
+  .last-price {
+    color: #ff4858;
+    margin-right: 10px;
+  }
+
+  .old-price {
+    text-decoration: line-through;
+    color: rgb(93, 101, 107);
+  }
+}
+
 .toggle-icon {
   position: absolute;
   right: -35px;

@@ -1,6 +1,6 @@
 <template>
   <div class="navBar container">
-    <h1 class="logo">BOUNCER</h1>
+    <h1 class="logo" :class="{ 'custom-logo': !isHomePage }">BOUNCER</h1>
     <ul class="nav-icons block md:flex">
       <li>
         <router-link to="/">HOME</router-link>
@@ -22,6 +22,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useProductsStore } from '@/stores/productsStore'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const isHomePage = computed(() => route.path === '/')
 const productsStore = useProductsStore()
 const categories = computed(() =>
   productsStore.categories.map((category) => category.name).splice(0, 5),
@@ -39,6 +44,10 @@ const categories = computed(() =>
     font-weight: bold;
     font-size: 32px;
     letter-spacing: 5px;
+  }
+  .custom-logo {
+    color: rgb(255, 66, 82);
+    -webkit-text-stroke: 1px rgb(255, 66, 82);
   }
 
   .nav-icons {

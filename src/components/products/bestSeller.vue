@@ -119,7 +119,10 @@ const fetchAllProducts = async () => {
 
     li {
       cursor: pointer;
-      padding: 10px;
+      padding: 3px;
+      @media (min-width: 767px) {
+        padding: 10px;
+      }
 
       &:hover {
         color: var(--blue-color);
