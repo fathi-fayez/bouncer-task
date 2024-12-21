@@ -32,7 +32,7 @@
             item.title.split(' ').slice(0, 3).join(' ')
           }}</span>
           <span class="item-cell col-span-4 md:col-span-2">$ {{ item.price }}</span>
-          <div class="item-cell col-span-4 md:col-span-2 bg-gray-200 m-auto flex">
+          <div class="item-cell col-span-4 md:col-span-2 bg-gray-200 m-auto flex w-24">
             <button @click="decreaseQuantity(item)" class="btn text-blue-500">-</button>
             <span class="m-3">{{ item.quantity }}</span>
             <button @click="addToCart(item)" class="btn text-blue-500">+</button>
