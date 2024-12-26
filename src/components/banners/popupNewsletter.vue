@@ -3,7 +3,7 @@
     <div class="newsletter grid grid-cols-12">
       <button class="newsletter-close-btn" @click="showPopup = false">X</button>
 
-      <div class="newsletter-content col-span-7">
+      <div class="newsletter-content col-span-12 md:col-span-7">
         <h2 class="newsletter-title">Newsletter</h2>
 
         <p class="newsletter-text">
@@ -14,7 +14,7 @@
         <form>
           <div class="newsletter-form">
             <input
-              class="newsletter-input border p-3 w-48"
+              class="newsletter-input mb-4 border p-3 w-48"
               type="search"
               name="search"
               placeholder="Email"
@@ -32,7 +32,7 @@
         </form>
       </div>
 
-      <div class="newsletter-image col-span-5">
+      <div class="newsletter-image bg-red-700 col-span-5">
         <img src="../../assets/images/banners/img.jpg" alt="Newsletter" />
       </div>
     </div>
@@ -74,6 +74,10 @@ const showPopup = ref<boolean>(true)
     width: 900px;
     position: relative;
 
+    @media (max-width: 991px) {
+      margin: 20px;
+    }
+
     .newsletter-close-btn {
       position: absolute;
       top: -10px;
@@ -92,21 +96,35 @@ const showPopup = ref<boolean>(true)
       align-content: center;
       justify-content: center;
       flex-direction: column;
-      padding: 60px 60px 0;
       text-align: center;
+      padding: 20px;
+
+      @media (min-width: 991px) {
+        padding: 60px 60px 0;
+      }
 
       .newsletter-title {
         font-size: 2rem;
         margin-bottom: 60px;
+        @media (max-width: 991px) {
+          margin-bottom: 10px;
+        }
       }
 
       .newsletter-text {
         font-size: 1.2rem;
         margin-bottom: 40px;
+        @media (max-width: 991px) {
+          margin-bottom: 10px;
+        }
       }
     }
 
     .newsletter-image {
+      display: none;
+      @media (min-width: 768px) {
+        display: block;
+      }
       img {
         max-width: 100%;
       }
