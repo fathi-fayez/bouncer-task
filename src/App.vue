@@ -1,5 +1,6 @@
 <template>
   <div>
+    <popupNewsletter />
     <Header> </Header>
     <breadcrumbs v-if="!$route.meta.withoutCrumps" :breadcrumbs="breadcrumbsArr" />
     <RouterView />
@@ -13,6 +14,7 @@ import { onMounted, ref, watch } from 'vue'
 import Header from './components/Header.vue'
 import breadcrumbs from './components/breadcrumbs.vue'
 import footerComponent from './components/footer.vue'
+import popupNewsletter from './components/banners/popupNewsletter.vue'
 import { useProductsStore } from '@/stores/productsStore'
 import { useCartStore } from '@/stores/cartStore'
 import { useRoute } from 'vue-router'

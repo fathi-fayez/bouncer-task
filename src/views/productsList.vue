@@ -4,7 +4,6 @@
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         <!-- SideBar -->
         <div
-          class=""
           :class="[
             'sideBar fixed lg:static top-0 h-screen bg-gray-600 lg:bg-white z-50 col-span-1 p-2 lg:p-0',
             { 'toggle-sideBar': toggleSideBar },
