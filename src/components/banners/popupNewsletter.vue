@@ -55,7 +55,7 @@ const showPopup = ref<boolean>(true)
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
+  visibility: hidden;
   z-index: 1000;
   animation: popup 1s ease-in-out 5s forwards;
 
@@ -66,6 +66,7 @@ const showPopup = ref<boolean>(true)
     }
     100% {
       opacity: 1;
+      visibility: visible;
       pointer-events: all;
     }
   }
